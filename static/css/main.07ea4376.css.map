@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.07ea4376.css","mappings":"AAAA,KAKC,kBAAmB,CAJnB,eAAgB,CAKhB,gBAAiB,CAJjB,YAAa,CACb,qBAAsB,CACtB,sBAGD","sources":["index.css"],"sourcesContent":["body {\n\tbackground: #ddd;\n\tdisplay: flex;\n\tflex-direction: column;\n\tjustify-content: center;\n\talign-items: center;\n\tblock-size: 100vh;\n}\n"],"names":[],"sourceRoot":""}
