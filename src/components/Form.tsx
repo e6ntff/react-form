@@ -106,7 +106,6 @@ const Form: React.FC<Props> = ({ data, setData, setIsEnded }) => {
 
 	const changeData = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = event.target;
-		console.log(value);
 		const { valid } = event.target.validity;
 		setData((prevData: Data) => {
 			const newData = {
