@@ -89,7 +89,7 @@ interface Props {
 
 const Form: React.FC<Props> = ({ data, setData, setIsEnded }) => {
 	const [isFormValid, setIsFormValid] = useState<boolean>(false);
-	const [passwordsValid, setPasswordsValid] = useState<boolean>(false);
+	const [passwordsValid, setPasswordsValid] = useState<boolean>(true);
 
 	const checkValidity = (data: Data) => {
 		const valid =
@@ -163,7 +163,7 @@ const Form: React.FC<Props> = ({ data, setData, setIsEnded }) => {
 				<Input
 					onChange={changeData}
 					name='password'
-					type='text'
+					type='password'
 					minLength={8}
 					maxLength={16}
 					required
@@ -175,7 +175,7 @@ const Form: React.FC<Props> = ({ data, setData, setIsEnded }) => {
 				<Input
 					onChange={changeData}
 					name='passwordRepeat'
-					type='text'
+					type='password'
 					minLength={8}
 					maxLength={16}
 					required
