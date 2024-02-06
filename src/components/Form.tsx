@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { Data } from '../App';
 
@@ -91,46 +91,52 @@ const Form: React.FC<Props> = ({ data, setData, setIsEnded }) => {
 	const [isFormValid, setIsFormValid] = useState<boolean>(false);
 	const [passwordsValid, setPasswordsValid] = useState<boolean>(true);
 
-	const checkValidity = (data: Data) => {
+	const checkValidity = useCallback((data: Data) => {
 		const valid =
 			!Object.values(data).some((el) => !el.valid) && checkPasswords(data);
 		setIsFormValid(valid);
-	};
+	}, []);
 
-	const changeText = (event: any) => {
+	const changeText = useCallback((event: any) => {
 		setData((prevData: Data) => ({
 			...prevData,
 			text: { valid: true, value: event.target.value },
 		}));
-	};
+	}, []);
 
-	const changeData = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const { name, value } = event.target;
-		const { valid } = event.target.validity;
-		setData((prevData: Data) => {
-			const newData = {
-				...prevData,
-				[name]: {
-					value: value,
-					valid: valid,
-				},
-			};
-			checkPasswords(newData);
-			checkValidity(newData);
-			return newData;
-		});
-	};
+	const changeData = useCallback(
+		(event: React.ChangeEvent<HTMLInputElement>) => {
+			const { name, value } = event.target;
+			const { valid } = event.target.validity;
+			setData((prevData: Data) => {
+				const newData = {
+					...prevData,
+					[name]: {
+						value: value,
+						valid: valid,
+					},
+				};
+				checkPasswords(newData);
+				checkValidity(newData);
+				return newData;
+			});
+		},
+		[]
+	);
 
-	const checkPasswords = (data: Data) => {
+	const checkPasswords = useCallback((data: Data) => {
 		const valid = data.password.value === data.passwordRepeat.value;
 		setPasswordsValid(valid);
 		return valid;
-	};
+	}, []);
 
-	const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		setIsEnded(true);
-	};
+	const handleFormSubmit = useCallback(
+		(event: React.FormEvent<HTMLFormElement>) => {
+			event.preventDefault();
+			setIsEnded(true);
+		},
+		[]
+	);
 
 	return (
 		<StyledForm onSubmit={handleFormSubmit}>
